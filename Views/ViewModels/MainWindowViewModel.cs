@@ -10,16 +10,15 @@ public partial class MainWindowViewModel(IViewModelManager vmm) : ObservableVali
     [ObservableProperty] ObservableCollection<ViewType> _viewTypes =  new ObservableCollection<ViewType>(Enum.GetValues<ViewType>().Skip(1));
     [ObservableProperty] ViewType _selectedViewType;
 
-    [ObservableProperty] IBaseViewModel _curentViewModel;
+    [ObservableProperty] IBaseViewModel _currentViewModel;
 
     internal void Init()
     {
-        SelectedViewType = ViewTypes.FirstOrDefault();
-        CurentViewModel = vmm.GetView(SelectedViewType);
+        SelectedViewType = ViewTypes.First();
     }
 
     partial void OnSelectedViewTypeChanged(ViewType value)
     {
-        CurentViewModel = vmm.GetView(value);
+        CurrentViewModel = vmm.GetView(value);
     }
 }
