@@ -5,15 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_MultyView.Views"
         xmlns:res="clr-namespace:WPF_MultyView.Resources"
-        xmlns:vm="clr-namespace:WPF_MultyView.ViewModels"
+        xmlns:vm="clr-namespace:WPF_MultyView.Views.ViewModels"
+        xmlns:views="clr-namespace:WPF_MultyView.Views"
         mc:Ignorable="d"
         Title="MainWindow"
-        Width="300"
-        Height="200">
-    <Window.DataContext>
+        Width="200"
+        Height="120">
+    
+    <!--<d:Window.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    </d:Window.DataContext>-->
+
+    <Window.Resources>
+        <DataTemplate
+        DataType="{x:Type vm:View_1ViewModel}">
+            <views:View_1/>
+        </DataTemplate>
+        <DataTemplate
+        DataType="{x:Type vm:View_2ViewModel}">
+            <views:View_2/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Grid.Row="0"
+                  Margin="8"
+                  ItemsSource="{Binding ViewTypes}"
+                  SelectedItem="{Binding SelectedViewType}"/>
+        <ContentControl Grid.Row="1"
+            Content="{Binding CurentViewModel}"/>
     </Grid>
 </Window>
